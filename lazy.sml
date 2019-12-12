@@ -9,8 +9,7 @@ datatype ENV = Emp
 (* lazy dinamico *)
 
 (* ovviamente non e' finita ma vogliamo "eval (e, Empty)" o "eval e Empty"? *) 
-fun eval (e, Empty) = Empty
-  | eval (e, Const n) = Const n;
+fun eval (e, Const n) = Const n;
 
 (* Test *)
 val x = Var (Name "x");
