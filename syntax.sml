@@ -18,6 +18,15 @@ per esempio: quando valutiamo eager, il secondo elemento può essere solo Fn (un
 datatype ENV = Empty (*ambiente vuoto*)
     | Concat of VAR * FUN * ENV * ENV; (* variabile, valore, ambiente in cui valutare, resto della lista dell'ambiente: è in sostanza una lista di (VAR, FUN, ENV) *) 
 
+fun varEq (Name x, Name y) = x=y; (*confronta due tipi VAR*)
+
+exception VarNotFound; (*eccezione sollevata se non si trova una variabile in un'ambiente*)
+exception CannotPerformSum; (*eccezione se si prova a sommare cose che non si possono sommare: Fn + x*)
+
+(*cerca una VAR in un ENV*)
+fun find (Empty, x) = raise VarNotFound (*x sicuramente non è nell'ambiente vuoto*)
+  | find (Concat(x, m, e1, e), y) = if varEq(x, y) then (m, e1) else find(e, y);
+
 
 (*Esempi di come usare i costruttori: *)
 (*
