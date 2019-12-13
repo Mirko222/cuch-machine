@@ -31,7 +31,9 @@ evalDE(Empty, App ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", C
 (* evalDE(Empty, Sum(Var (Name "x"), Const 19)); (* x+19 --> VarNotFound *) *)
 (* evalDE(Empty, Sum ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10)) )); (* (Fn x => x+1) + (let y=5 in y+10)  --> CannotPerformSum*) *)
 
+
 evalDE(Empty, App( Fn(Name "x", App(Var (Name "x"), Const 5)), Fn(Name "x", Sum(Var(Name "x"), Const 10))) ); (* (Fn x => x 5) (Fn x => x+10) *)
 evalDE(Empty, App( Fn(Name "x", Var (Name "x")), Fn(Name "x", Sum(Var(Name "x"), Const 10))) ); (* (Fn x => x) (Fn x => x+10) *)
 
 evalDE(Empty, App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ) ); (* (Fn x => xx) (Fn x => xx)  --> loop :) *)
+
