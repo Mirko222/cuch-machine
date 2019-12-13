@@ -13,13 +13,22 @@ fun evalDE (env, Const k) = Const k
                                     | _ => raise CannotPerformSum
                                 end end
     
-    | evalDE (env, Var x) = #1find(env, x) (*cerchiamo semplicemente x nell'ambiente: visto che siamo eager è già tutto valutato. NB: prendiamo il primo elemento*)
+    | evalDE (env, Var x) = #1(find(env, x)) (*cerchiamo semplicemente x nell'ambiente: visto che siamo eager è già tutto valutato. NB: prendiamo il primo elemento*)
     
-    | evalDE (env, Let (x, m, n)) = evalDE(Concat(x, evalDE(m), Empty, env), n) (*valutiamo m, creiamo l'ambiente env(x, m), e poi valutiamo n in quell'ambiente*)
+    | evalDE (env, Let (x, m, n)) = (evalDE(Concat(x, evalDE(env, m), Empty, env), n)) (*valutiamo m, creiamo l'ambiente env(x, m), e poi valutiamo n in quell'ambiente*)
 
     | evalDE(env, App(m, n)) = let val f = evalDE(env, m) in (*valutiamo m e deve essere Fn*)
-                                
-                               end
-    | evalDE (env, _) = Const 42;
+                                case f of Fn(x, c) => evalDE(Concat(x, evalDE(env, n), Empty, env), c) (*valutiamo n, e poi valutiamo c aumentando l'ambiente con (x, n valutato)*)
+                                | _ => raise CannotPerformApp
+                               end;
 
-evalDE(Empty, Sum(Const 41, Fn (Name "x", Const 5)));
+(*test*)
+evalDE(Concat(Name "x", Const 10, Empty, Empty), Sum(Const 41, Var (Name "x"))); (* (x, 10) |- 41+x  -->  51*)
+evalDE(Empty, Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10))); (* let y=5 in y+10  --> 15 *)
+evalDE(Empty, App ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10)) )); (* (Fn x => x+1) (let y=5 in y+10)  --> 16*)
+
+(* evalDE(Empty, App(Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10)), Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10)))); (* (let y=5 in y+10) (let y=5 in y+10)  --> CannotPerformApp *) *)
+(* evalDE(Empty, Sum(Var (Name "x"), Const 19)); (* x+19 --> VarNotFound *) *)
+(* evalDE(Empty, Sum ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10)) )); (* (Fn x => x+1) + (let y=5 in y+10)  --> CannotPerformSum*) *)
+
+evalDE(Empty, App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ) ); (* (Fn x => xx) (Fn x => xx)  --> loop :) *)
