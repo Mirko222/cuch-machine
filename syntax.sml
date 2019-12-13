@@ -22,6 +22,7 @@ fun varEq (Name x, Name y) = x=y; (*confronta due tipi VAR*)
 
 exception VarNotFound; (*eccezione sollevata se non si trova una variabile in un'ambiente*)
 exception CannotPerformSum; (*eccezione se si prova a sommare cose che non si possono sommare: Fn + x*)
+exception CannotPerformApp; (*eccezione se non si può effettuare un'applicazione: App(10, 5)*)
 
 (*cerca una VAR in un ENV*)
 fun find (Empty, x) = raise VarNotFound (*x sicuramente non è nell'ambiente vuoto*)
