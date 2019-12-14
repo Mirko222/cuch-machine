@@ -22,9 +22,6 @@ fun evalDE (env, Const k) = Const k
                                 | _ => raise CannotPerformApp
                                end;
 
-<<<<<<< HEAD
-evalDE(Empty, Sum(Const 41, Fn (Name "x", Const 5)));
-=======
 (*test*)
 evalDE(Concat(Name "x", Const 10, Empty, Empty), Sum(Const 41, Var (Name "x"))); (* (x, 10) |- 41+x  -->  51*)
 evalDE(Empty, Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10))); (* let y=5 in y+10  --> 15 *)
@@ -34,5 +31,14 @@ evalDE(Empty, App ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", C
 (* evalDE(Empty, Sum(Var (Name "x"), Const 19)); (* x+19 --> VarNotFound *) *)
 (* evalDE(Empty, Sum ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", Const 5, Sum(Var (Name "y"), Const 10)) )); (* (Fn x => x+1) + (let y=5 in y+10)  --> CannotPerformSum*) *)
 
-evalDE(Empty, App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ) ); (* (Fn x => xx) (Fn x => xx)  --> loop :) *)
->>>>>>> 854275249ba8ecbb5041dd6618a669aa0dc6d17a
+
+evalDE(Empty, App( Fn(Name "x", App(Var (Name "x"), Const 5)), Fn(Name "x", Sum(Var(Name "x"), Const 10))) ); (* (Fn x => x 5) (Fn x => x+10) *)
+evalDE(Empty, App( Fn(Name "x", Var (Name "x")), Fn(Name "x", Sum(Var(Name "x"), Const 10))) ); (* (Fn x => x) (Fn x => x+10) *)
+
+(* evalDE(Empty, App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ) ); (* (Fn x => xx) (Fn x => xx)  --> loop :) *) *)
+
+(* (x, 3) |-  (fn x => x) x --> 3 *) 
+evalDE(Concat(Name "x", Const 3, Empty, Empty), App(Fn(Name "x", Var (Name "x")), Var (Name "x"))); 
+
+(* let x = [(Fn x=>xx)(Fn x=>xx)] in 42  --> loop*)
+(* evalDE(Empty, Let(Name "x", App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ), Const 42)); *)
