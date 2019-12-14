@@ -35,5 +35,10 @@ evalDE(Empty, App ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", C
 evalDE(Empty, App( Fn(Name "x", App(Var (Name "x"), Const 5)), Fn(Name "x", Sum(Var(Name "x"), Const 10))) ); (* (Fn x => x 5) (Fn x => x+10) *)
 evalDE(Empty, App( Fn(Name "x", Var (Name "x")), Fn(Name "x", Sum(Var(Name "x"), Const 10))) ); (* (Fn x => x) (Fn x => x+10) *)
 
-evalDE(Empty, App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ) ); (* (Fn x => xx) (Fn x => xx)  --> loop :) *)
+(* evalDE(Empty, App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ) ); (* (Fn x => xx) (Fn x => xx)  --> loop :) *) *)
 
+(* (x, 3) |-  (fn x => x) x --> 3 *) 
+evalDE(Concat(Name "x", Const 3, Empty, Empty), App(Fn(Name "x", Var (Name "x")), Var (Name "x"))); 
+
+(* let x = [(Fn x=>xx)(Fn x=>xx)] in 42  --> loop*)
+(* evalDE(Empty, Let(Name "x", App( Fn(Name "x", App(Var(Name "x"), Var(Name "x"))), Fn(Name "x", App(Var(Name "x"), Var(Name "x"))) ), Const 42)); *)
