@@ -1,8 +1,6 @@
 use "syntax.sml";
 
-(* valuta espressioni
- *
- * eval: ENV * FUN -> FUN *)
+(* evalDL: ENV * FUN -> FUN *)
 fun evalDL (env, Const k) = Const k
   (* cerca x nell'ambiente env e se lo trova lo valuta *)
   | evalDL (env, Var x) = evalDL(env, #1( find(env, x) ))
