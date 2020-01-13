@@ -1,0 +1,35 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{mathtools, proof, graphicx, lipsum}
+
+\title{%
+	CuCh machine \\
+  	\large Linguaggi di Programmazione \\ 
+	a.a. 2019-2020}
+
+\author{Edoardo De Matteis  \\ 1746561 
+   \and Mirko Giacchini \\ matricola } 
+   
+\date{}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\section{Introduzione}
+		%testo fittizio completamente eliminabile ma non ho un testo da scrivere
+		\lipsum[1]
+		%per le formule matematiche si usano mathtools e per la logica proof. Come esempio ecco
+		%un'induzione
+		\[
+			\infer{
+				\forall n  \; P(n)
+			}
+			{%
+ 		   		P(0)
+    				& P(n) \to P(n+1)
+			}
+		\]
+\end{document}
