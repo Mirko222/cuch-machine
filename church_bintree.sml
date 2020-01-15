@@ -2,9 +2,6 @@ use "dynamic_lazy.sml";
 
 (* church numbers *) 
 
-(* zero = fn x => fn y => y *)
-val zero = Fn(Name "x", Fn(Name "y", Var(Name "y")));
-
 (* one = fn x => fn y => x y *)
 val one = Fn(Name "x", Fn(Name "y", App(Var(Name "x"), Var(Name "y"))));
 
@@ -14,6 +11,15 @@ val sum = Fn(Name "w", Fn(Name "z", Fn(Name "x", Fn(Name "y",
   App(App(Var(Name "z"), Var(Name "x")),Var(Name "y"))
  )))));
 
+(* eval = fn z => z(fn x => x+1)0 *)
+val eval_church = Fn(Name "z", 
+ App(
+ App(Var(Name "z"), Fn(Name "x", Sum(Var(Name "x"), Const 1))), Const 0));
+
+
+evalDL(Empty,  App(eval_church, one));
+
+ (*
 (* church booleans *) 
 
 (* false = fn x => fn y => y *)
@@ -43,3 +49,4 @@ val node = Fn(Name "t", Fn(Name "l", Fn(Name "r",
 val leaves = Fn(Name "b", Fn(Name "t", Fn(Name "l", Fn(Name "r",
  App(App(Var(Name "b"), one), 
   App(App(sum, App(leaves, Var(Name "l"))), App(leaves, Var(Name "r"))))))));
+ *)

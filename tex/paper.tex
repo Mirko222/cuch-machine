@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
-\usepackage{mathtools, proof, graphicx, lipsum}
+\usepackage{mathtools, ebproof, graphicx, xcolor}
 
 \title{%
 	CuCh machine \\
@@ -19,17 +19,188 @@
 	\tableofcontents
 	
 	\section{Introduzione}
-		%testo fittizio completamente eliminabile ma non ho un testo da scrivere
-		\lipsum[1]
-		%per le formule matematiche si usano mathtools e per la logica proof. Come esempio ecco
-		%un'induzione
-		\[
-			\infer{
-				\forall n  \; P(n)
-			}
-			{%
- 		   		P(0)
-    				& P(n) \to P(n+1)
-			}
-		\]
+	\section{Sintassi}
+	\textit{\textcolor{gray}{syntax.sml}} \\
+	\[ FUN ::= Const | Sum | Var | Fn | Let | App \]
+	\[ ENV \ni E: VAR \rightarrow VAR \times FUN \times ENV \]
+	\[ find: Env \times Fun \rightarrow (Fun \times Env) \cup E \]
+	dove $E$ è l'insieme delle eccezioni.
+	In $ENV$ nel codominio il prodotto cartesiano presenta nuovamente $ENV$ perchè necessario nelle valutazioni con scoping statico, nel mondo dinamico non è necessario e semplicemente lo si ignora.
+	\section{Semantica operazionale}
+	\[\mapsto \subseteq ENV \times FUN \times VAL \equiv ENV \vdash FUN \mapsto VAL\]
+	\subsection{Dynamic eager}
+	%costanti
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Const \mapsto Const}
+		\end{prooftree}
+	\]
+	\\
+	%variabile
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[\quad E(x) = v]{E \vdash Var &x \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%somma
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v1}
+			\hypo{E \vdash N \mapsto v2 }
+			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%funzione
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M)}
+		\end{prooftree}
+	\]
+	\\
+	%applicazione
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto (x, M')}
+			\hypo{E \vdash N \mapsto v}
+			\hypo{E(x, v) \vdash M' \mapsto v'}
+			\infer3[]{E \vdash App(M, N) \mapsto v'}
+		\end{prooftree}
+	\]
+
+	\subsection{Dynamic lazy}
+	%costanti
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Const \mapsto Const}
+		\end{prooftree}
+	\]
+	\\
+	%variabile
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v }
+			\infer1[\quad E(x) = M]{E \vdash Var &x \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%somma
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v1}
+			\hypo{E \vdash N \mapsto v2 }
+			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%funzione
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M)}
+		\end{prooftree}
+	\]
+	\\
+	%applicazione
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto (x, M')}
+			\hypo{E(x, N) \vdash M' \mapsto v}
+			\infer2[]{E \vdash App(M, N) \mapsto v}
+		\end{prooftree}
+	\]
+	
+
+	\subsection{Static eager}
+	%costanti
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Const \mapsto Const}
+		\end{prooftree}
+	\]
+	\\
+	%variabile
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v }
+			\infer1[\quad E(x) = M]{E \vdash Var &x \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%somma
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v1}
+			\hypo{E \vdash N \mapsto v2 }
+			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%funzione
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M, E')}
+		\end{prooftree}
+	\]
+	\\
+	%applicazione
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto (x, M', E')}
+			\hypo{E \vdash N \mapsto v}
+			\hypo{E'(x, v) \vdash M' \mapsto v'}
+			\infer3[]{E \vdash App(M, N) \mapsto v'}
+		\end{prooftree}
+	\]
+
+	\subsection{Static lazy}
+	%costanti
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Const \mapsto Const}
+		\end{prooftree}
+	\]
+	\\
+	%variabile
+	\[
+		\begin{prooftree}
+			\hypo{E' \vdash M \mapsto v }
+			\infer1[\quad E(x) = (M, E')]{E \vdash Var &x \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%somma
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v1}
+			\hypo{E \vdash N \mapsto v2 }
+			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
+		\end{prooftree}
+	\]
+	\\
+	%funzione
+	\[
+		\begin{prooftree}
+			\hypo{}
+			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M, E')}
+		\end{prooftree}
+	\]
+	\\
+	%applicazione
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto (x, M', E')}
+			\hypo{E'(x, N) \vdash M' \mapsto v}
+			\infer2[]{E \vdash App(M, N) \mapsto v}
+		\end{prooftree}
+	\]
+
 \end{document}
