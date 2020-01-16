@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.30)  15 JAN 2020 14:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.30)  16 JAN 2020 03:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -463,39 +463,29 @@ e
 \openout3 = `paper.toc'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 38--41
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--49
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
 
  []
 
 [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 55--58
+Underfull \hbox (badness 10000) in paragraph at lines 64--67
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 63--66
+Underfull \hbox (badness 10000) in paragraph at lines 72--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--85
+Underfull \hbox (badness 10000) in paragraph at lines 81--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--93
+Underfull \hbox (badness 10000) in paragraph at lines 89--92
 
  []
 
@@ -505,12 +495,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--102
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--110
+Underfull \hbox (badness 10000) in paragraph at lines 117--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--129
+Underfull \hbox (badness 10000) in paragraph at lines 125--128
 
  []
 
@@ -520,7 +510,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 134--137
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--146
+Underfull \hbox (badness 10000) in paragraph at lines 142--145
 
  []
 
@@ -530,34 +520,74 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--154
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 10000) in paragraph at lines 169--172
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 178--181
+Underfull \hbox (badness 10000) in paragraph at lines 177--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--190
+Underfull \hbox (badness 10000) in paragraph at lines 186--189
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 195--198
+Underfull \hbox (badness 10000) in paragraph at lines 194--197
 
  []
 
-[3] (./paper.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--225
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--233
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--242
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 247--250
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 256--259
+
+ []
+
+[3]
+Overfull \hbox (102.11125pt too wide) detected at line 301
+[]
+ []
+
+
+Overfull \hbox (21.45331pt too wide) detected at line 321
+[]
+ []
+
+[4] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 13931 strings out of 492616
- 249498 string characters out of 6129480
- 303206 words of memory out of 5000000
- 17767 multiletter control sequences out of 15000+600000
+ 13935 strings out of 492616
+ 249520 string characters out of 6129480
+ 303238 words of memory out of 5000000
+ 17771 multiletter control sequences out of 15000+600000
  542278 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,63p,819b,317s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,15n,63p,819b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super
 /cm-super-t1.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts
@@ -570,10 +600,10 @@ m/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm
 fb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
 ></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb><
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on paper.pdf (3 pages, 144219 bytes).
+Output written on paper.pdf (4 pages, 153824 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 62 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

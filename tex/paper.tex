@@ -19,21 +19,47 @@
 	\tableofcontents
 	
 	\section{Introduzione}
+	Una \textbf{Cu}rry-\textbf{Ch}urch machine implementa un interprete minimale di un linguaggio funzionale non tipato.   
 	\section{Sintassi}
 	\textit{\textcolor{gray}{syntax.sml}} \\
-	\[ FUN ::= Const | Sum | Var | Fn | Let | App \]
-	\[ ENV \ni E: VAR \rightarrow VAR \times FUN \times ENV \]
-	\[ find: Env \times Fun \rightarrow (Fun \times Env) \cup E \]
-	dove $E$ è l'insieme delle eccezioni.
-	In $ENV$ nel codominio il prodotto cartesiano presenta nuovamente $ENV$ perchè necessario nelle valutazioni con scoping statico, nel mondo dinamico non è necessario e semplicemente lo si ignora.
+	 
+	\begin{equation} \label{fun}
+	\begin{split}
+		FUN ::= & \ Const \ k \ |\ Var \ x \\
+			&|\ Sum(M, N) \ |\ Fn(x, M) \\ 
+			&|\ Let(x, M, N) \ |\ App(M, N) 
+	\end{split}
+	\end{equation}
+
+	\begin{equation}
+		K ::= 0 \ | \ 1 \ | \ \cdots
+	\end{equation}
+	
+	\begin{equation}
+		X ::= A \ | \ \cdots \ | \ Z \ | \ a \ | \ \cdots \ | \ z \ | \ \cdots
+	\end{equation}
+
+	\begin{equation} \label{env}
+		ENV : VAR \rightharpoonup VAR \times FUN \times ENV
+	\end{equation}
+
+	\begin{equation} \label{find}
+		find: ENV \times FUN \rightarrow (FUN \times ENV) \cup EXC
+	\end{equation}
+	
+	In $ENV$ nel codominio il prodotto cartesiano presenta  $ENV$ poichè necessario nelle valutazioni con scoping statico, nel mondo dinamico non è necessario e semplicemente lo si ignora. $EXC$ è l'insieme delle eccezioni.
+
 	\section{Semantica operazionale}
-	\[\mapsto \subseteq ENV \times FUN \times VAL \equiv ENV \vdash FUN \mapsto VAL\]
+	\begin{equation} \label{eval}
+		\mapsto \ \subseteq ENV \times FUN \times VAL \ \equiv \ ENV \vdash FUN \mapsto VAL
+	\end{equation}
+
 	\subsection{Dynamic eager}
 	%costanti
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[]{E \vdash Const \mapsto Const}
+			\infer1[]{E \vdash Const \ k \mapsto Const \ k}
 		\end{prooftree}
 	\]
 	\\
@@ -41,7 +67,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[\quad E(x) = v]{E \vdash Var &x \mapsto v}
+			\infer1[\quad E(x) = v]{E \vdash Var \ x \mapsto v}
 		\end{prooftree}
 	\]
 	\\
@@ -71,13 +97,22 @@
 			\infer3[]{E \vdash App(M, N) \mapsto v'}
 		\end{prooftree}
 	\]
+	\\
+	%let
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v}
+			\hypo{E(x, v) \vdash N \mapsto v'}
+			\infer2[]{E \vdash Let(x, M, N) \mapsto v' }
+		\end{prooftree}
+	\]
 
 	\subsection{Dynamic lazy}
 	%costanti
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[]{E \vdash Const \mapsto Const}
+			\infer1[]{E \vdash Const \ k\mapsto Const \ k}
 		\end{prooftree}
 	\]
 	\\
@@ -114,6 +149,14 @@
 			\infer2[]{E \vdash App(M, N) \mapsto v}
 		\end{prooftree}
 	\]
+	\\
+	%let
+	\[
+		\begin{prooftree}
+			\hypo{E(x,M) \vdash N \mapsto v}
+			\infer1[]{E \vdash Let(x, M, N) \mapsto v }
+		\end{prooftree}
+	\]
 	
 
 	\subsection{Static eager}
@@ -121,7 +164,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[]{E \vdash Const \mapsto Const}
+			\infer1[]{E \vdash Const \ k \mapsto Const \ k}
 		\end{prooftree}
 	\]
 	\\
@@ -146,7 +189,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M, E')}
+			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M, E)}
 		\end{prooftree}
 	\]
 	\\
@@ -159,13 +202,22 @@
 			\infer3[]{E \vdash App(M, N) \mapsto v'}
 		\end{prooftree}
 	\]
+	\\
+	%let
+	\[
+		\begin{prooftree}
+			\hypo{E \vdash M \mapsto v}
+			\hypo{E(x, v) \vdash N \mapsto v'}
+			\infer2[]{E \vdash Let(x, M, N) \mapsto v' }
+		\end{prooftree}
+	\]
 
 	\subsection{Static lazy}
 	%costanti
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[]{E \vdash Const \mapsto Const}
+			\infer1[]{E \vdash Const \ k \mapsto Const \ k} 
 		\end{prooftree}
 	\]
 	\\
@@ -190,7 +242,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{}
-			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M, E')}
+			\infer1[]{E \vdash Fn(x, M) \mapsto (x, M, E)}
 		\end{prooftree}
 	\]
 	\\
@@ -202,5 +254,72 @@
 			\infer2[]{E \vdash App(M, N) \mapsto v}
 		\end{prooftree}
 	\]
+	\\
+	%let
+	\[
+		\begin{prooftree}
+			\hypo{E(x, M, E) \vdash N \mapsto v}
+			\infer1[]{E \vdash Let(x, M, N) \mapsto v}
+		\end{prooftree}
+	\]
+
+
+	\section{Osservazioni}
+	Un programma che mette in mostra le differenze tra una valutazione eager ed una lazy è il programma 
+	\[ let \ x = x \ in \ x \]
+	che in una semantica static eager (come in SML) dà errore perchè $x$ non è definita. In una semantica dynamic lazy va invece in loop
+
+	\begin{figure}[ht]
+	\[
+		\begin{prooftree}
+			\hypo{\cdots}
+			\infer1[]{\langle (x,x) \rangle \vdash x \mapsto }
+			\infer1[]{\langle (x,x) \rangle \vdash x \mapsto }
+			\infer1[]{\emptyset \vdash Let(x,x,x) \mapsto }
+		\end{prooftree}
+	\]
+	\end{figure}
+
+
+	Inoltre in SML non è possibile eseguire il più piccolo transinfinito 
+	\[ \omega = (fn \ x \Rightarrow x \ x)(fn \ x \Rightarrow x \ x) \]
+	per via del sistema dei tipi, $FUN$ non essendo tipato non presenta questo problema e si entra in loop come si può dimostrare:
+	
+	\begin{figure}[ht]
+	\[
+		\begin{prooftree}
+	
+			\hypo{\emptyset \vdash Fn(x, x \ x) \mapsto (x, x \ x) }
+			\hypo{\cdots}
+			\infer1[]{\langle (x, Fn(x, x \ x))(x,x)\rangle \vdash x \ x \mapsto (x, x \ x)}
+			\infer1[]{\langle(x, Fn(x, x \ x))\rangle \vdash x \mapsto (x, x \ x)}
+			\hypo{\cdots}
+			\infer1[]{\langle (x, Fn(x, x \ x))(x,x)\rangle \vdash x \ x \mapsto }
+			\infer2[]{\langle (x, Fn(x, x \ x))\rangle \vdash x \ x \mapsto }
+			\infer2[]{\emptyset \vdash App(Fn(x, x \ x),  Fn(x, x \ x)) \mapsto } 
+		\end{prooftree}
+	\]
+	\caption{dynamic lazy}
+	\end{figure}
+	
+	\begin{figure}[ht]
+	\[
+		\begin{prooftree}
+			\hypo{\emptyset \vdash Fn(x, x \ x) \mapsto (x, x \ x, \emptyset)}
+
+			\hypo{\emptyset \vdash Fn(x, x \ x) \mapsto (x, x \ x, \emptyset)}
+
+			\hypo{\cdots}
+			\infer1[]{\langle (x, x \ x) \rangle \vdash x \ x \mapsto}
+			\infer1[]{\langle (x, x \ x) \rangle \vdash x \mapsto}
+			\hypo{}
+			\infer2[]{\langle (x, x \ x) \rangle \vdash x \ x \mapsto }
+
+			\infer3[]{\emptyset \vdash Fn(x, x \ x)\ Fn(x, x \ x) \mapsto }
+
+		\end{prooftree}
+	\]
+	\caption{static eager}
+	\end{figure}
 
 \end{document}
