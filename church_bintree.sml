@@ -1,4 +1,6 @@
-use "dynamic_lazy.sml";
+
+(* use "dynamic_lazy.sml"; (* VarNotFound perchè non si memorizza l'ambiente in Fn *) *)
+use "static_eager.sml"; 
 
 (* church numbers *) 
 
@@ -11,13 +13,18 @@ val sum = Fn(Name "w", Fn(Name "z", Fn(Name "x", Fn(Name "y",
   App(App(Var(Name "z"), Var(Name "x")),Var(Name "y"))
  )))));
 
-(* eval = fn z => z(fn x => x+1)0 *)
-val eval_church = Fn(Name "z", 
+(* decode = fn z => z(fn x => x+1)0 *)
+val decode = Fn(Name "z", 
  App(
  App(Var(Name "z"), Fn(Name "x", Sum(Var(Name "x"), Const 1))), Const 0));
 
 
-evalDL(Empty,  App(eval_church, one));
+ let val k = #1(evalSE(Empty,  App(decode, one))) in 
+   case k of 
+        Const k => k
+      | _ => raise VarNotFound (* eccezione a caso *)
+ end;
+
 
  (*
 (* church booleans *) 
