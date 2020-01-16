@@ -1,4 +1,4 @@
-use "dynamic_lazy.sml";
+use "static_eager.sml";
 
 (* church numbers *) 
 
@@ -17,7 +17,7 @@ val eval_church = Fn(Name "z",
  App(Var(Name "z"), Fn(Name "x", Sum(Var(Name "x"), Const 1))), Const 0));
 
 
-evalDL(Empty,  App(eval_church, one));
+evalSE(Empty, App(eval_church, one));
 
  (*
 (* church booleans *) 

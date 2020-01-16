@@ -24,9 +24,7 @@ fun evalSE (env, Const n) = (Const n, env)
   | evalSE (env, App(m, n)) =   let val f = evalSE(env, m) in (* valuto m *)
                                 case #1(f) of 
                                      Fn(x, m1) => (
-                                        evalSE(
-                                        (Concat(x, #1(evalSE(env, n)), #2f, #2f),
-                                        m1))
+                                        evalSE(Concat(x, #1(evalSE(env, n)), #2(evalSE(env, n)), #2(f)), m1)
                                      ) 
                                    | _ => raise CannotPerformApp
                                 end;
