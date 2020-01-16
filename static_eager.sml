@@ -68,6 +68,6 @@ fun evalSE (env, Const n) = (Const n, env)
 #1(evalSE(Concat(Name "y", Const 2, Empty, Empty),
   Let(Name "x", Sum(Var(Name "y"), Const 1), Let(Name "y", Const 5, Var(Name "x")) )));
 
-(* (x, 3) |-  (fn x => x) x --> cattura (?) *) 
-(* #1(evalSE(Concat(Name "x", Const 3, Empty, Empty), 
- App(Fn(Name "x", Var (Name "x")), Var (Name "x")))); *)
+(* (x, 3) |-  (fn x => x) x --> 3 *) 
+ #1(evalSE(Concat(Name "x", Const 3, Empty, Empty), 
+ App(Fn(Name "x", Var (Name "x")), Var (Name "x"))));
