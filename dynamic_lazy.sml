@@ -72,5 +72,10 @@ evalDL(Concat(Name "y", Const 2, Empty, Empty),
   Let(Name "x", Sum(Var(Name "y"), Const 1), Let(Name "y", Const 5, Var(Name "x")) ));
 
 (* (x, 3) |-  (fn x => x) x --> cattura (?) *) 
-(* evalDL(Concat(Name "x", Const 3, Empty, Empty), 
+ (* evalDL(Concat(Name "x", Const 3, Empty, Empty), 
  App(Fn(Name "x", Var (Name "x")), Var (Name "x"))); *)
+
+
+(* (x, 3) |-  (fn y => y) x --> 3 *) 
+ evalDL(Concat(Name "x", Const 3, Empty, Empty), 
+ App(Fn(Name "x", Var (Name "x")), Var (Name "x")));

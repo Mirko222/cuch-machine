@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
-\usepackage{mathtools, ebproof, graphicx, xcolor}
+\usepackage{float, mathtools, ebproof, graphicx, xcolor}
 
 \title{%
 	CuCh machine \\
@@ -267,8 +267,7 @@
 			\infer1[]{E \vdash Let(x, M, N) \mapsto v}
 		\end{prooftree}
 	\]
-
-
+	
 	\section{Osservazioni}
 	Un programma che mette in mostra le differenze tra una valutazione eager ed una lazy è il programma 
 	\[ let \ x = x \ in \ x \]
@@ -285,27 +284,9 @@
 	\]
 	\end{figure}
 
-
 	Inoltre in SML non è possibile eseguire il più piccolo transinfinito 
 	\[ \omega = (fn \ x \Rightarrow x \ x)(fn \ x \Rightarrow x \ x) \]
-	per via del sistema dei tipi, $FUN$ non essendo tipato non presenta questo problema e si entra in loop come si può dimostrare:
-	
-	\begin{figure}[ht]
-	\[
-		\begin{prooftree}
-	
-			\hypo{\emptyset \vdash Fn(x, x \ x) \mapsto (x, x \ x) }
-			\hypo{\cdots}
-			\infer1[]{\langle (x, Fn(x, x \ x))(x,x)\rangle \vdash x \ x \mapsto (x, x \ x)}
-			\infer1[]{\langle(x, Fn(x, x \ x))\rangle \vdash x \mapsto (x, x \ x)}
-			\hypo{\cdots}
-			\infer1[]{\langle (x, Fn(x, x \ x))(x,x)\rangle \vdash x \ x \mapsto }
-			\infer2[]{\langle (x, Fn(x, x \ x))\rangle \vdash x \ x \mapsto }
-			\infer2[]{\emptyset \vdash App(Fn(x, x \ x),  Fn(x, x \ x)) \mapsto } 
-		\end{prooftree}
-	\]
-	\caption{dynamic lazy}
-	\end{figure}
+	per via del sistema dei tipi, $FUN$ non essendo tipato non presenta questo problema e si entra in loop come si può dimostrare ad esempio con valutazione eager statica
 	
 	\begin{figure}[ht]
 	\[
@@ -324,7 +305,31 @@
 
 		\end{prooftree}
 	\]
-	\caption{static eager}
+	\end{figure}
+	
+	Un'esecuzione interessante è quella di $\langle (x, k) \rangle \vdash App(Fn(x,x),x)$ per la cattura di $x$. 
+
+	\begin{figure}[H]
+	\[
+		\begin{prooftree}
+			\hypo{\langle (x,3) \rangle \vdash Fn(x,x) \mapsto (x,x)}
+			\hypo{\cdots}
+			\infer1[]{\langle (x,3)(x,x) \rangle \vdash x \mapsto }
+			\infer1[]{\langle (x,3)(x,x) \rangle \vdash x \mapsto }
+			\infer2[]{\langle (x,3) \rangle \vdash App(Fn(x,x),x) \mapsto }
+		\end{prooftree}
+	\]
+	\end{figure}
+
+
+	\begin{figure}[H]
+	\[
+		\begin{prooftree}
+			\hypo{\langle (x,3) \rangle \vdash Fn(y,y) \mapsto (y,y)}
+			\hypo{\langle (x,3)(y,y) \rangle \vdash x \mapsto 3}
+			\infer2[]{\langle (x,3) \rangle \vdash App(Fn(y,y),x) \mapsto 3}
+		\end{prooftree}
+	\]
 	\end{figure}
 
 \end{document}

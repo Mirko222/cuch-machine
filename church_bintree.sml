@@ -25,9 +25,7 @@ val decode = Fn(Name "z",
         Const k => k
       | _ => raise VarNotFound (* eccezione a caso *)
  end;
- 
 
- (*
 (* church booleans *) 
 
 (* false = fn x => fn y => y *)
@@ -38,23 +36,36 @@ val True = Fn(Name "x", Fn(Name "y", Var(Name "x")));
 
 (* church binary trees *)
 
-(* non possiamo usare unit quindi mi creo un surrogato *)
-val env = Concat(Name "void", Const 0, Empty, Empty);
+(* albero vuoto *)
+val empty = Fn(Name "b", Fn(Name "l", Fn(Name "r",
+ App(App(True, False), False))));
 
-(* empty tree = fn t => fn l => fn => r => true () () () *)
-val empty = Fn(Name "t", Fn(Name "l", Fn(Name "r", 
- App(App(App(True, Var(Name "void")), Var(Name "void")), Var(Name "void")))));
+(* albero non vuoto *)
+val node = Fn(Name "b", Fn(Name "l", Fn(Name "r",
+ App(App(False, Var(Name "l")), Var(Name "r")))));
 
-(* non-empty tree = fn t => fn l => fn r => false t l r *)
-val node = Fn(Name "t", Fn(Name "l", Fn(Name "r", 
- App(App(App(False, Var(Name "t")), Var(Name "l")), Var(Name "r")))));
+(* ricorsore di punto fisso *)
+val Y = Fn(Name "f", 
+ App(Fn(Name "x", App(Var(Name "f"), App(Var(Name "x"), Var(Name "x")))),
+ Fn(Name "x", App(Var(Name "f"), App(Var(Name "x"), Var(Name "x"))))));
+
+(* F *)
+val F = Fn(Name "f", Fn(Name "x", Fn(Name "b", Fn(Name "l", Fn(Name "r",
+ App(App(Var(Name "b"), one), App(App(sum, 
+ App(Var(Name "f"), Var(Name "l"))), App(Var(Name "f"), Var(Name "r"))))))))); 
+
 
 (* fun leaves empty = 1 
  *   | leaves node = (leaves (getLeft node)) + (leaves (getRight node)) *)
+val leaves = Fn(Name "b", Fn(Name "l", Fn(Name "r",
+ App(App(Var(Name "b"), one), App(App(sum, 
+ App(App(Y,F), Var(Name "l"))), App(App(Y,F), Var(Name "r"))))))); 
 
-(* ricorsore per leaves *)
+val one_node = Fn(Name "b", Fn(Name "l", Fn(Name "r",
+ App(App(False, empty), empty))));
 
-val leaves = Fn(Name "b", Fn(Name "t", Fn(Name "l", Fn(Name "r",
- App(App(Var(Name "b"), one), 
-  App(App(sum, App(leaves, Var(Name "l"))), App(leaves, Var(Name "r"))))))));
- *)
+let val k = #1(evalSE(Empty, App(decode, App(leaves, one_node)))) in 
+   case k of 
+        Const k => k
+      | _ => raise VarNotFound (* eccezione a caso *)
+ end;

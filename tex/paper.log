@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.30)  16 JAN 2020 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.10.30)  17 JAN 2020 01:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -59,24 +59,32 @@ File: babel.def 2019/05/04 3.31 Babel common definitions
 Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count93
 )
+(/usr/local/texlive/2019/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count94
+\float@exts=\toks16
+\float@box=\box27
+\@float@everytoks=\toks17
+\@floatcapt=\box28
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks18
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count94
-\calc@Bcount=\count95
+\calc@Acount=\count95
+\calc@Bcount=\count96
 \calc@Adimen=\dimen104
 \calc@Bdimen=\dimen105
 \calc@Askip=\skip43
 \calc@Bskip=\skip44
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count96
+\calc@Ccount=\count97
 \calc@Cskip=\skip45
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/mathtools/mhsetup.sty
@@ -92,7 +100,7 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks17
+\@emptytoks=\toks19
 \ex@=\dimen106
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
@@ -102,41 +110,41 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count97
+\inf@bad=\count98
 LaTeX Info: Redefining \frac on input line 223.
-\uproot@=\count98
-\leftroot@=\count99
+\uproot@=\count99
+\leftroot@=\count100
 LaTeX Info: Redefining \overline on input line 385.
-\classnum@=\count100
-\DOTSCASE@=\count101
+\classnum@=\count101
+\DOTSCASE@=\count102
 LaTeX Info: Redefining \ldots on input line 482.
 LaTeX Info: Redefining \dots on input line 485.
 LaTeX Info: Redefining \cdots on input line 606.
-\Mathstrutbox@=\box27
-\strutbox@=\box28
+\Mathstrutbox@=\box29
+\strutbox@=\box30
 \big@size=\dimen108
 LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
-\macc@depth=\count102
-\c@MaxMatrixCols=\count103
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
 \dotsspace@=\muskip10
-\c@parentequation=\count104
-\dspbrk@lvl=\count105
-\tag@help=\toks18
-\row@=\count106
-\column@=\count107
-\maxfields@=\count108
-\andhelp@=\toks19
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
+\tag@help=\toks20
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
+\andhelp@=\toks21
 \eqnshift@=\dimen109
 \alignsep@=\dimen110
 \tagshift@=\dimen111
 \tagwidth@=\dimen112
 \totwidth@=\dimen113
 \lineht@=\dimen114
-\@envbody=\toks20
+\@envbody=\toks22
 \multlinegap=\skip47
 \multlinetaggap=\skip48
-\mathdisplay@stack=\toks21
+\mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2844.
 LaTeX Info: Redefining \] on input line 2845.
 )
@@ -144,7 +152,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count109
+\g_MT_multlinerow_int=\count110
 \l_MT_multwidth_dim=\dimen115
 \origjot=\skip49
 \l_MT_shortvdotswithinadjustabove_dim=\dimen116
@@ -160,18 +168,18 @@ Package: expl3 2019-05-07 L3 programming layer (loader)
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/expl3-code.tex
 Package: expl3 2019-05-07 L3 programming layer (code)
-\c_max_int=\count110
-\l_tmpa_int=\count111
-\l_tmpb_int=\count112
-\g_tmpa_int=\count113
-\g_tmpb_int=\count114
-\g__kernel_prg_map_int=\count115
-\c__ior_term_ior=\count116
-\c_log_iow=\count117
-\l_iow_line_count_int=\count118
-\l__iow_line_target_int=\count119
-\l__iow_one_indent_int=\count120
-\l__iow_indent_int=\count121
+\c_max_int=\count111
+\l_tmpa_int=\count112
+\l_tmpb_int=\count113
+\g_tmpa_int=\count114
+\g_tmpb_int=\count115
+\g__kernel_prg_map_int=\count116
+\c__ior_term_ior=\count117
+\c_log_iow=\count118
+\l_iow_line_count_int=\count119
+\l__iow_line_target_int=\count120
+\l__iow_one_indent_int=\count121
+\l__iow_indent_int=\count122
 \c_zero_dim=\dimen122
 \c_max_dim=\dimen123
 \l_tmpa_dim=\dimen124
@@ -190,83 +198,83 @@ Package: expl3 2019-05-07 L3 programming layer (code)
 \l_tmpb_muskip=\muskip14
 \g_tmpa_muskip=\muskip15
 \g_tmpb_muskip=\muskip16
-\l_keys_choice_int=\count122
-\l__intarray_loop_int=\count123
+\l_keys_choice_int=\count123
+\l__intarray_loop_int=\count124
 \c__intarray_sp_dim=\dimen128
-\g__intarray_font_int=\count124
-\c__fp_leading_shift_int=\count125
-\c__fp_middle_shift_int=\count126
-\c__fp_trailing_shift_int=\count127
-\c__fp_big_leading_shift_int=\count128
-\c__fp_big_middle_shift_int=\count129
-\c__fp_big_trailing_shift_int=\count130
-\c__fp_Bigg_leading_shift_int=\count131
-\c__fp_Bigg_middle_shift_int=\count132
-\c__fp_Bigg_trailing_shift_int=\count133
-\c__kernel_randint_max_int=\count134
-\g__fp_array_int=\count135
-\l__fp_array_loop_int=\count136
-\l__sort_length_int=\count137
-\l__sort_min_int=\count138
-\l__sort_top_int=\count139
-\l__sort_max_int=\count140
-\l__sort_true_max_int=\count141
-\l__sort_block_int=\count142
-\l__sort_begin_int=\count143
-\l__sort_end_int=\count144
-\l__sort_A_int=\count145
-\l__sort_B_int=\count146
-\l__sort_C_int=\count147
-\l__tl_analysis_normal_int=\count148
-\l__tl_analysis_index_int=\count149
-\l__tl_analysis_nesting_int=\count150
-\l__tl_analysis_type_int=\count151
-\l__regex_internal_a_int=\count152
-\l__regex_internal_b_int=\count153
-\l__regex_internal_c_int=\count154
-\l__regex_balance_int=\count155
-\l__regex_group_level_int=\count156
-\l__regex_mode_int=\count157
-\c__regex_cs_in_class_mode_int=\count158
-\c__regex_cs_mode_int=\count159
-\l__regex_catcodes_int=\count160
-\l__regex_default_catcodes_int=\count161
-\c__regex_catcode_D_int=\count162
-\c__regex_catcode_S_int=\count163
-\c__regex_catcode_L_int=\count164
-\c__regex_catcode_O_int=\count165
-\c__regex_catcode_A_int=\count166
-\c__regex_all_catcodes_int=\count167
-\l__regex_show_lines_int=\count168
-\l__regex_min_state_int=\count169
-\l__regex_max_state_int=\count170
-\l__regex_left_state_int=\count171
-\l__regex_right_state_int=\count172
-\l__regex_capturing_group_int=\count173
-\l__regex_min_pos_int=\count174
-\l__regex_max_pos_int=\count175
-\l__regex_curr_pos_int=\count176
-\l__regex_start_pos_int=\count177
-\l__regex_success_pos_int=\count178
-\l__regex_curr_char_int=\count179
-\l__regex_curr_catcode_int=\count180
-\l__regex_last_char_int=\count181
-\l__regex_case_changed_char_int=\count182
-\l__regex_curr_state_int=\count183
-\l__regex_step_int=\count184
-\l__regex_min_active_int=\count185
-\l__regex_max_active_int=\count186
-\l__regex_replacement_csnames_int=\count187
-\l__regex_match_count_int=\count188
-\l__regex_min_submatch_int=\count189
-\l__regex_submatch_int=\count190
-\l__regex_zeroth_submatch_int=\count191
-\g__regex_trace_regex_int=\count192
-\c_empty_box=\box29
-\l_tmpa_box=\box30
-\l_tmpb_box=\box31
-\g_tmpa_box=\box32
-\g_tmpb_box=\box33
+\g__intarray_font_int=\count125
+\c__fp_leading_shift_int=\count126
+\c__fp_middle_shift_int=\count127
+\c__fp_trailing_shift_int=\count128
+\c__fp_big_leading_shift_int=\count129
+\c__fp_big_middle_shift_int=\count130
+\c__fp_big_trailing_shift_int=\count131
+\c__fp_Bigg_leading_shift_int=\count132
+\c__fp_Bigg_middle_shift_int=\count133
+\c__fp_Bigg_trailing_shift_int=\count134
+\c__kernel_randint_max_int=\count135
+\g__fp_array_int=\count136
+\l__fp_array_loop_int=\count137
+\l__sort_length_int=\count138
+\l__sort_min_int=\count139
+\l__sort_top_int=\count140
+\l__sort_max_int=\count141
+\l__sort_true_max_int=\count142
+\l__sort_block_int=\count143
+\l__sort_begin_int=\count144
+\l__sort_end_int=\count145
+\l__sort_A_int=\count146
+\l__sort_B_int=\count147
+\l__sort_C_int=\count148
+\l__tl_analysis_normal_int=\count149
+\l__tl_analysis_index_int=\count150
+\l__tl_analysis_nesting_int=\count151
+\l__tl_analysis_type_int=\count152
+\l__regex_internal_a_int=\count153
+\l__regex_internal_b_int=\count154
+\l__regex_internal_c_int=\count155
+\l__regex_balance_int=\count156
+\l__regex_group_level_int=\count157
+\l__regex_mode_int=\count158
+\c__regex_cs_in_class_mode_int=\count159
+\c__regex_cs_mode_int=\count160
+\l__regex_catcodes_int=\count161
+\l__regex_default_catcodes_int=\count162
+\c__regex_catcode_D_int=\count163
+\c__regex_catcode_S_int=\count164
+\c__regex_catcode_L_int=\count165
+\c__regex_catcode_O_int=\count166
+\c__regex_catcode_A_int=\count167
+\c__regex_all_catcodes_int=\count168
+\l__regex_show_lines_int=\count169
+\l__regex_min_state_int=\count170
+\l__regex_max_state_int=\count171
+\l__regex_left_state_int=\count172
+\l__regex_right_state_int=\count173
+\l__regex_capturing_group_int=\count174
+\l__regex_min_pos_int=\count175
+\l__regex_max_pos_int=\count176
+\l__regex_curr_pos_int=\count177
+\l__regex_start_pos_int=\count178
+\l__regex_success_pos_int=\count179
+\l__regex_curr_char_int=\count180
+\l__regex_curr_catcode_int=\count181
+\l__regex_last_char_int=\count182
+\l__regex_case_changed_char_int=\count183
+\l__regex_curr_state_int=\count184
+\l__regex_step_int=\count185
+\l__regex_min_active_int=\count186
+\l__regex_max_active_int=\count187
+\l__regex_replacement_csnames_int=\count188
+\l__regex_match_count_int=\count189
+\l__regex_min_submatch_int=\count190
+\l__regex_submatch_int=\count191
+\l__regex_zeroth_submatch_int=\count192
+\g__regex_trace_regex_int=\count193
+\c_empty_box=\box31
+\l_tmpa_box=\box32
+\l_tmpb_box=\box33
+\g_tmpa_box=\box34
+\g_tmpb_box=\box35
 \l__box_top_dim=\dimen129
 \l__box_bottom_dim=\dimen130
 \l__box_left_dim=\dimen131
@@ -275,8 +283,8 @@ Package: expl3 2019-05-07 L3 programming layer (code)
 \l__box_bottom_new_dim=\dimen134
 \l__box_left_new_dim=\dimen135
 \l__box_right_new_dim=\dimen136
-\l__box_internal_box=\box34
-\l__coffin_internal_box=\box35
+\l__box_internal_box=\box36
+\l__coffin_internal_box=\box37
 \l__coffin_internal_dim=\dimen137
 \l__coffin_offset_x_dim=\dimen138
 \l__coffin_offset_y_dim=\dimen139
@@ -284,13 +292,13 @@ Package: expl3 2019-05-07 L3 programming layer (code)
 \l__coffin_y_dim=\dimen141
 \l__coffin_x_prime_dim=\dimen142
 \l__coffin_y_prime_dim=\dimen143
-\c_empty_coffin=\box36
-\l__coffin_aligned_coffin=\box37
-\l__coffin_aligned_internal_coffin=\box38
-\l_tmpa_coffin=\box39
-\l_tmpb_coffin=\box40
-\g_tmpa_coffin=\box41
-\g_tmpb_coffin=\box42
+\c_empty_coffin=\box38
+\l__coffin_aligned_coffin=\box39
+\l__coffin_aligned_internal_coffin=\box40
+\l_tmpa_coffin=\box41
+\l_tmpb_coffin=\box42
+\g_tmpa_coffin=\box43
+\g_tmpb_coffin=\box44
 \l__coffin_bounding_shift_dim=\dimen144
 \l__coffin_left_corner_dim=\dimen145
 \l__coffin_right_corner_dim=\dimen146
@@ -298,29 +306,29 @@ Package: expl3 2019-05-07 L3 programming layer (code)
 \l__coffin_top_corner_dim=\dimen148
 \l__coffin_scaled_total_height_dim=\dimen149
 \l__coffin_scaled_width_dim=\dimen150
-\c__coffin_empty_coffin=\box43
-\l__coffin_display_coffin=\box44
-\l__coffin_display_coord_coffin=\box45
-\l__coffin_display_pole_coffin=\box46
+\c__coffin_empty_coffin=\box45
+\l__coffin_display_coffin=\box46
+\l__coffin_display_coord_coffin=\box47
+\l__coffin_display_pole_coffin=\box48
 \l__coffin_display_offset_dim=\dimen151
 \l__coffin_display_x_dim=\dimen152
 \l__coffin_display_y_dim=\dimen153
 \g__file_internal_ior=\read1
-\l__seq_internal_a_int=\count193
-\l__seq_internal_b_int=\count194
-\c__deprecation_minus_one=\count195
+\l__seq_internal_a_int=\count194
+\l__seq_internal_b_int=\count195
+\c__deprecation_minus_one=\count196
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/l3kernel/l3pdfmode.def
 File: l3pdfmode.def 2019-04-06 v L3 Experimental driver: PDF mode
-\l__driver_color_stack_int=\count196
-\l__driver_pdf_tmp_box=\box47
+\l__driver_color_stack_int=\count197
+\l__driver_pdf_tmp_box=\box49
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2019-05-03 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count197
-\g__xparse_grabber_int=\count198
-\l__xparse_m_args_int=\count199
-\l__xparse_v_nesting_int=\count266
+\l__xparse_current_arg_int=\count198
+\g__xparse_grabber_int=\count199
+\l__xparse_m_args_int=\count266
+\l__xparse_v_nesting_int=\count267
 )
 Package: ebproof 2017/05/17 v2.0 EB's proof trees
 \l_ebproof_separation_dim=\dimen154
@@ -332,12 +340,12 @@ Package: ebproof 2017/05/17 v2.0 EB's proof trees
 \l_ebproof_label_separation_dim=\dimen160
 \l_ebproof_label_axis_dim=\dimen161
 \l_ebproof_transit_dim=\dimen162
-\g_ebproof_level_int=\count267
-\g_ebproof_stack_box=\box48
-\l_ebproof_a_box=\box49
-\l_ebproof_b_box=\box50
-\l_ebproof_c_box=\box51
-\l_ebproof_d_box=\box52
+\g_ebproof_level_int=\count268
+\g_ebproof_stack_box=\box50
+\l_ebproof_a_box=\box51
+\l_ebproof_b_box=\box52
+\l_ebproof_c_box=\box53
+\l_ebproof_d_box=\box54
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
@@ -396,17 +404,17 @@ LaTeX Info: Redefining \it@ccap on input line 17.
 
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count268
+\scratchcounter=\count269
 \scratchdimen=\dimen165
-\scratchbox=\box53
-\nofMPsegments=\count269
-\nofMParguments=\count270
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count271
+\scratchbox=\box55
+\nofMPsegments=\count270
+\nofMParguments=\count271
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count272
 \MPscratchDim=\dimen166
-\MPnumerator=\count272
-\makeMPintoPDFobject=\count273
-\everyMPtoPDFconversion=\toks23
+\MPnumerator=\count273
+\makeMPintoPDFobject=\count274
+\everyMPtoPDFconversion=\toks25
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -590,41 +598,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 261--264
  []
 
 
-Overfull \hbox (102.11125pt too wide) detected at line 306
+Overfull \hbox (21.45331pt too wide) detected at line 307
 []
  []
 
-
-Overfull \hbox (21.45331pt too wide) detected at line 326
-[]
- []
-
-[4] [5] (./paper.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[4] [5] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 13935 strings out of 492616
- 249520 string characters out of 6129480
- 303238 words of memory out of 5000000
- 17771 multiletter control sequences out of 15000+600000
+ 13994 strings out of 492616
+ 250296 string characters out of 6129480
+ 303639 words of memory out of 5000000
+ 17826 multiletter control sequences out of 15000+600000
  542278 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,15n,63p,819b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
-sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
-local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/lo
-cal/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/loca
-l/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/
-texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/te
-xlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texliv
-e/2019/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on paper.pdf (5 pages, 160186 bytes).
+ 41i,15n,63p,826b,372s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-s
+uper/cm-super-t1.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/
+sfbx1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sf
+bx1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx
+1440.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm10
+00.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200
+.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1728.p
+fb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb
+>
+Output written on paper.pdf (5 pages, 161119 bytes).
 PDF statistics:
  65 PDF objects out of 1000 (max. 8388607)
  46 compressed objects within 1 object stream
