@@ -10,7 +10,7 @@
 	a.a. 2019-2020}
 
 \author{Edoardo De Matteis  \\ 1746561 
-   \and Mirko Giacchini \\ matricola } 
+   \and Mirko Giacchini \\ 1811809 } 
    
 \date{}
 
@@ -19,7 +19,8 @@
 	\tableofcontents
 	
 	\section{Introduzione}
-	Una \textbf{Cu}rry-\textbf{Ch}urch machine implementa un interprete minimale di un linguaggio funzionale non tipato.   
+	Una \textbf{Cu}rry-\textbf{Ch}urch machine implementa un interprete minimale di un linguaggio funzionale non tipato. Abbiamo quindi implementato in SML un interprete per il linguaggio FUN visto a lezione. Nonostante una CuCh machine dovrebbe implementare l'applicazione di funzioni per sostituzione, si è qui preferito utilizzare una valutazione basata su ambienti, questo per poter sperimentare anche con semantiche differenti. La valutazione per sostituzione può comunque essere emulata con la semantica lazy statica.\\
+È stato poi usato l'interprete creato per scrivere alcuni programmi di esempio (tra cui booleani di church, numeri di church, ecc.).
 	\section{Sintassi}
 	\textit{\textcolor{gray}{syntax.sml}} \\
 	 
@@ -44,7 +45,7 @@
 	\end{equation}
 
 	\begin{equation} \label{find}
-		find: ENV \times FUN \rightarrow (FUN \times ENV) \cup EXC
+		find: ENV \times VAR \rightarrow (FUN \times ENV) \cup EXC
 	\end{equation}
 	
 	In $ENV$ nel codominio il prodotto cartesiano presenta  $ENV$ poichè necessario nelle valutazioni con scoping statico, nel mondo dinamico non è necessario e semplicemente lo si ignora. $EXC$ è l'insieme delle eccezioni.
@@ -77,7 +78,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{E \vdash M \mapsto v1}
-			\hypo{E \vdash N \mapsto v2 }
+			\hypo{E \vdash N \mapsto v2 }
 			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
 		\end{prooftree}
 	\]
@@ -131,7 +132,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{E \vdash M \mapsto v1}
-			\hypo{E \vdash N \mapsto v2 }
+			\hypo{E \vdash N \mapsto v2 }
 			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
 		\end{prooftree}
 	\]
@@ -175,8 +176,8 @@
 	%variabile
 	\[
 		\begin{prooftree}
-			\hypo{E \vdash M \mapsto v }
-			\infer1[\quad E(x) = M]{E \vdash Var &x \mapsto v}
+			\hypo{}
+			\infer1[\quad E(x) = v]{E \vdash Var \ x \mapsto v}
 		\end{prooftree}
 	\]
 	\\
@@ -184,7 +185,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{E \vdash M \mapsto v1}
-			\hypo{E \vdash N \mapsto v2 }
+			\hypo{E \vdash N \mapsto v2 }
 			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
 		\end{prooftree}
 	\]
@@ -238,7 +239,7 @@
 	\[
 		\begin{prooftree}
 			\hypo{E \vdash M \mapsto v1}
-			\hypo{E \vdash N \mapsto v2 }
+			\hypo{E \vdash N \mapsto v2 }
 			\infer2[\quad (v=v1+v2)]{E \vdash Sum(M, N) \mapsto v}
 		\end{prooftree}
 	\]
@@ -268,7 +269,17 @@
 		\end{prooftree}
 	\]
 	
-	\section[Osservazioni]{Osservazioni\footnote{Negli esempi proposti si è preferito adottare la sintassi di SML per leggibilità.}}
+	\section{Esempi}
+	\textit{\textcolor{gray}{church\_bool.sml}} \\
+	Sono stati implementati i booleani di church, interamente in linguaggio FUN, e qualche semplice operazione sui booleani.\\ \\
+	\textit{\textcolor{gray}{church\_numbers.sml}} \\
+	Sono stati implementati i numeri di church, interamente in linguaggio FUN, e qualche operazione tra numeri di church (somma, prodotto, potenza).\\ \\
+	\textit{\textcolor{gray}{church\_factorial.sml}} \\
+	È stato implementato il fattoriale usando solamente i numeri di church (quindi è stata necessaria l'implementazione di una funzione isZero e di una funzione predecessore). Essendo questo programma più complesso, abbiamo usato il nostro interprete "immerso" in sml, in modo da poter usare variabili SML come degli alias, in modo da renderlo più leggibile. \\ \\
+	\textit{\textcolor{gray}{church\_bintree.sml}} \\
+	Sono stati implementati gli alberi binari di church, con una funzione che ne conta le foglie. Notiamo che gli alberi binari di church non sono implementabili in SML per problemi di tipi, in FUN non tipato riusciamo invece a creare un esempio funzionante: e la realizzazione di tale esempio è stata infatti lo scopo principale di questo progetto.
+
+	\section[Osservazioni]{Osservazioni\footnote{Negli esempi proposti si è preferito adottare la sintassi di FUN per leggibilità.}}
 	Un programma che mette in mostra le differenze tra una valutazione eager ed una lazy è il programma 
 	\[ let \ x = x \ in \ x \]
 	che in una semantica static eager (come in SML) dà errore perchè $x$ non è definita. In una semantica dynamic lazy va invece in loop
@@ -307,7 +318,7 @@
 	\]
 	\end{figure}
 	
-	Un'esecuzione interessante è quella di $\langle (x, k) \rangle \vdash (fn \ x \Rightarrow x)x$ che in ambiente lazy statico ha un comportamento per cui la valutazione cambia in base a come si rinominano le variabili violando l'$\alpha$-regola.  
+	Un'esecuzione interessante è quella di $\langle (x, k) \rangle \vdash (fn \ x \Rightarrow x)x$ che in ambiente lazy dinamico ha un comportamento per cui la valutazione cambia in base a come si rinominano le variabili violando l'$\alpha$-regola.  
 
 	\begin{figure}[H]
 	\[
@@ -332,7 +343,7 @@
 	\]
 	\end{figure}
 
-	Una CuCh machine dovrebbe lavorare per sostituzione, in questo progetto sono stati però usati gli ambienti emulando la sostituzione con una valutazione lazy statica, usando altre valutazioni infatti il ricorsore \eqref{Y} non dà i risultati attesi.
+	È interessante notare che nell'implementazione delle funzioni fattoriale e numLeaves (degli esempi precedenti) è stato necessario l'uso del ricorsore \eqref{Y}. Provando tali programmi con semantiche diverse dalla lazy statica (cioè quella che corrisponde a una valutazione per sostituzione) non si ottiene il risultato voluto in quanto si va loop. 
 	\begin{equation} \label{Y}
 	\mathrm{Y}= fn \ f \Rightarrow (fn \ x \Rightarrow f(xx))(fn \ x \Rightarrow f(xx))
 	\end{equation}
