@@ -268,7 +268,7 @@
 		\end{prooftree}
 	\]
 	
-	\section{Osservazioni}
+	\section[Osservazioni]{Osservazioni\footnote{Negli esempi proposti si è preferito adottare la sintassi di SML per leggibilità.}}
 	Un programma che mette in mostra le differenze tra una valutazione eager ed una lazy è il programma 
 	\[ let \ x = x \ in \ x \]
 	che in una semantica static eager (come in SML) dà errore perchè $x$ non è definita. In una semantica dynamic lazy va invece in loop
@@ -279,7 +279,7 @@
 			\hypo{\cdots}
 			\infer1[]{\langle (x,x) \rangle \vdash x \mapsto }
 			\infer1[]{\langle (x,x) \rangle \vdash x \mapsto }
-			\infer1[]{\emptyset \vdash Let(x,x,x) \mapsto }
+			\infer1[]{\emptyset \vdash let \ x=x \ in \ x \mapsto }
 		\end{prooftree}
 	\]
 	\end{figure}
@@ -291,9 +291,9 @@
 	\begin{figure}[ht]
 	\[
 		\begin{prooftree}
-			\hypo{\emptyset \vdash Fn(x, x \ x) \mapsto (x, x \ x, \emptyset)}
+			\hypo{\emptyset \vdash fn \ x \Rightarrow x \ x \mapsto (x, x \ x, \emptyset)}
 
-			\hypo{\emptyset \vdash Fn(x, x \ x) \mapsto (x, x \ x, \emptyset)}
+			\hypo{\emptyset \vdash fn \ x \Rightarrow x \ x \mapsto (x, x \ x, \emptyset)}
 
 			\hypo{\cdots}
 			\infer1[]{\langle (x, x \ x) \rangle \vdash x \ x \mapsto}
@@ -301,22 +301,22 @@
 			\hypo{}
 			\infer2[]{\langle (x, x \ x) \rangle \vdash x \ x \mapsto }
 
-			\infer3[]{\emptyset \vdash Fn(x, x \ x)\ Fn(x, x \ x) \mapsto }
+			\infer3[]{\emptyset \vdash (fn \ x \Rightarrow x \ x)(fn \ x \Rightarrow x \ x) \mapsto }
 
 		\end{prooftree}
 	\]
 	\end{figure}
 	
-	Un'esecuzione interessante è quella di $\langle (x, k) \rangle \vdash App(Fn(x,x),x)$ per la cattura di $x$. 
+	Un'esecuzione interessante è quella di $\langle (x, k) \rangle \vdash (fn \ x \Rightarrow x)x$ che in ambiente lazy statico ha un comportamento per cui la valutazione cambia in base a come si rinominano le variabili violando l'$\alpha$-regola.  
 
 	\begin{figure}[H]
 	\[
 		\begin{prooftree}
-			\hypo{\langle (x,3) \rangle \vdash Fn(x,x) \mapsto (x,x)}
+			\hypo{\langle (x,3) \rangle \vdash fn \ x \Rightarrow x \mapsto (x,x)}
 			\hypo{\cdots}
 			\infer1[]{\langle (x,3)(x,x) \rangle \vdash x \mapsto }
 			\infer1[]{\langle (x,3)(x,x) \rangle \vdash x \mapsto }
-			\infer2[]{\langle (x,3) \rangle \vdash App(Fn(x,x),x) \mapsto }
+			\infer2[]{\langle (x,3) \rangle \vdash (fn \ x \Rightarrow x) x \mapsto }
 		\end{prooftree}
 	\]
 	\end{figure}
@@ -325,11 +325,16 @@
 	\begin{figure}[H]
 	\[
 		\begin{prooftree}
-			\hypo{\langle (x,3) \rangle \vdash Fn(y,y) \mapsto (y,y)}
+			\hypo{\langle (x,3) \rangle \vdash fn \ y \Rightarrow y \mapsto (y,y)}
 			\hypo{\langle (x,3)(y,y) \rangle \vdash x \mapsto 3}
-			\infer2[]{\langle (x,3) \rangle \vdash App(Fn(y,y),x) \mapsto 3}
+			\infer2[]{\langle (x,3) \rangle \vdash (fn \ y \Rightarrow y)x \mapsto 3}
 		\end{prooftree}
 	\]
 	\end{figure}
+
+	Una CuCh machine dovrebbe lavorare per sostituzione, in questo progetto sono stati però usati gli ambienti emulando la sostituzione con una valutazione lazy statica, usando altre valutazioni infatti il ricorsore \eqref{Y} non dà i risultati attesi.
+	\begin{equation} \label{Y}
+	\mathrm{Y}= fn \ f \Rightarrow (fn \ x \Rightarrow f(xx))(fn \ x \Rightarrow f(xx))
+	\end{equation}
 
 \end{document}

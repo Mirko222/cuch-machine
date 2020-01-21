@@ -1,71 +1,104 @@
+use "static_lazy.sml";  (*static_eager va in loop... probabilmente perché cerca di "valutare il ricorsore" *)
 
-(* use "dynamic_lazy.sml"; (* VarNotFound perchè non si memorizza l'ambiente in Fn *) *)
-use "static_eager.sml"; 
+(*utility per booleani di church*)
 
-(* church numbers *) 
-
-(* one = fn x => fn y => x y *)
-val one = Fn(Name "x", Fn(Name "y", App(Var(Name "x"), Var(Name "y"))));
-
-(* sum = fn w => fn z => fn x => fn y => w x(z x y) *)
-val sum = Fn(Name "w", Fn(Name "z", Fn(Name "x", Fn(Name "y", 
- App(App(Var(Name "w"), Var(Name "x")), 
-  App(App(Var(Name "z"), Var(Name "x")),Var(Name "y"))
- )))));
-
-(* decode = fn z => z(fn x => x+1)0 *)
-val decode = Fn(Name "z", 
- App(
- App(Var(Name "z"), Fn(Name "x", Sum(Var(Name "x"), Const 1))), Const 0));
-
-
-
- let val k = #1(evalSE(Empty,  App(decode, one))) in 
-   case k of 
-        Const k => k
-      | _ => raise VarNotFound (* eccezione a caso *)
- end;
-
-(* church booleans *) 
-
-(* false = fn x => fn y => y *)
-val False = Fn(Name "x", Fn(Name "y", Var(Name "y")));
-
-(* true = fn x => fn y => x *)
+(*valuta un booleano di church (0=false, 1=true)*)
+val evalChurchBool = Fn(Name "x", App(App(Var(Name "x"), Const 1), Const 0));
+(*true = Fn x, y => x*)
 val True = Fn(Name "x", Fn(Name "y", Var(Name "x")));
+(*false = Fn x, y => y*)
+val False = Fn(Name "x", Fn(Name "y", Var(Name "y")));
+(*not = Fn z => (Fn x, y => z y x)*)
+val NOT = Fn(Name "z", Fn(Name "x", Fn(Name "y", App(App(Var(Name "z"), Var(Name "y")), Var(Name "x")))));
+(*and = Fn z,w => z w False*)
+val AND = Fn(Name "z", Fn(Name "w", App(App(Var (Name "z"), Var (Name "w")), False)));
+(*or = Fn z,w => z True w*)
+val OR = Fn(Name "z", Fn(Name "w", App(App(Var (Name "z"), True), Var (Name "w"))));
 
-(* church binary trees *)
+(*utility per liste di church. NB: <a, b, c> --> Fn x => x a b c*)
+(*Pni(w) = i-esimo elemento della lista w di lunghezza n: Fn w=> w (Fn x1, x2, ..., xn => xi) (proiezione)*)
 
-(* albero vuoto *)
-val empty = Fn(Name "b", Fn(Name "l", Fn(Name "r",
- App(App(True, False), False))));
+(*P31: Fn w => w (Fn x1, x2, x3 => x1) *)
+val P31 = Fn(Name "w", App(Var (Name "w"), Fn(Name "x1", Fn(Name "x2", Fn (Name "x3", Var (Name "x1")))))); (*proiezione 1° elemento*)
+val P32 = Fn(Name "w", App(Var (Name "w"), Fn(Name "x1", Fn(Name "x2", Fn (Name "x3", Var (Name "x2")))))); (*proiezione 2° elemento*)
+val P33 = Fn(Name "w", App(Var (Name "w"), Fn(Name "x1", Fn(Name "x2", Fn (Name "x3", Var (Name "x3")))))); (*proiezione 3° elemento*)
 
-(* albero non vuoto *)
-val node = Fn(Name "b", Fn(Name "l", Fn(Name "r",
- App(App(False, Var(Name "l")), Var(Name "r")))));
-
-(* ricorsore di punto fisso *)
-val Y = Fn(Name "f", 
- App(Fn(Name "x", App(Var(Name "f"), App(Var(Name "x"), Var(Name "x")))),
- Fn(Name "x", App(Var(Name "f"), App(Var(Name "x"), Var(Name "x"))))));
-
-(* F *)
-val F = Fn(Name "f", Fn(Name "x", Fn(Name "b", Fn(Name "l", Fn(Name "r",
- App(App(Var(Name "b"), one), App(App(sum, 
- App(Var(Name "f"), Var(Name "l"))), App(Var(Name "f"), Var(Name "r"))))))))); 
+(*combinatore di punto fisso:
+Y = Fn f => (Fn x => f (x x)) (Fn x => f (x x)) *)
+val Y = Fn(Name "f", App(Fn(Name "x", App(Var(Name "f"), App(Var(Name "x"), Var(Name "x")))), Fn(Name "x", App(Var(Name "f"), App(Var(Name "x"), Var(Name "x"))))));
 
 
-(* fun leaves empty = 1 
- *   | leaves node = (leaves (getLeft node)) + (leaves (getRight node)) *)
-val leaves = Fn(Name "b", Fn(Name "l", Fn(Name "r",
- App(App(Var(Name "b"), one), App(App(sum, 
- App(App(Y,F), Var(Name "l"))), App(App(Y,F), Var(Name "r"))))))); 
+(*Alberi binari: sono una lista di 3 elementi:
+1° elemento: booleano, se false -> albero vuoto, se true -> albero non vuoto
+2° elemento: sottoalbero sinistro (valido solo se il booleano è True, altrimenti può essere qualsiasi cosa)
+3° elemento: sottoalbero destro (valido solo se il booleano è True, altrimenti può essere qualsiasi cosa) 
+quindi: empty = <False, False, False> 
+        branch(t1, t2) = <True, t1, t2> *)
 
-val one_node = Fn(Name "b", Fn(Name "l", Fn(Name "r",
- App(App(False, empty), empty))));
+(*alcuni alberi di prova*)
 
-let val k = #1(evalSE(Empty, App(decode, App(leaves, one_node)))) in 
-   case k of 
-        Const k => k
-      | _ => raise VarNotFound (* eccezione a caso *)
- end;
+(*albero vuoto = <False, False, False> = Fn x => x False False False (NB: gli ultimi due False potevano essere qualsiasi altra cosa) *)
+val emptyTree = Fn(Name "x", App(App(App(Var (Name "x"), False), False), False));
+
+(*albero con un nodo = branch(empty, empty) = <True, empty, empty> *)
+val oneNode = Fn(Name "x", App(App(App(Var (Name "x"), True), emptyTree), emptyTree)); 
+
+(*tree1 = branch(oneNode, oneNode): *)
+val tree1 = Fn(Name "x", App(App(App(Var (Name "x"), True), oneNode), oneNode));
+
+(*tree2 = branch(tree1, oneNode)  (3 foglie) *)
+val tree2 = Fn(Name "x", App(App(App(Var (Name "x"), True), tree1), oneNode));
+
+(*tree3 = branch(tree1, tree2)  (5 foglie) *)
+val tree3 = Fn(Name "x", App(App(App(Var (Name "x"), True), tree1), tree2));
+
+(*tree4 = branch(tree3, tree3)  (10 foglie) *)
+val tree4 = Fn(Name "x", App(App(App(Var (Name "x"), True), tree3), tree3));
+
+(*tree5 = branch(empty, tree4)  (10 foglie) *)
+val tree5 = Fn(Name "x", App(App(App(Var (Name "x"), True), emptyTree), tree4));
+
+(*tree6 = branch(tree4, tree5)  (20 foglie) *)
+val tree6 = Fn(Name "x", App(App(App(Var (Name "x"), True), tree4), tree5));
+
+(*alcune funzioni sugli alberi binari*)
+
+(*controlla se l'albero è vuoto: restituisce booleano di church
+Fn z => not P13(z) *)
+val isEmptyTree = Fn(Name "z", App(NOT, App(P31, Var(Name "z"))));
+
+(*controlla se l'albero è una foglia: Fn z => P13(z) (isEmptyTree(P23(z)) AND isEmptyTree(P33(z))) False
+cioè se non è vuoto, controlliamo se sono vuoti sia sx che dx, altrimenti sicuramente non è una foglia (perché l'albero vuoto non è una foglia) *)
+val isLeaf = Fn(Name "z", App(App(App(P31, Var(Name "z")), 
+                                        App(App(AND, App(isEmptyTree, App(P32, Var(Name "z"))) ), App(isEmptyTree, App(P33, Var(Name "z")))) ),
+                                        False));
+
+(*numero foglie: prende f e t, t è l'albero binario, e f è la "funzione stessa", cioè possiamo usare f per fare ricorsione (verrà poi fornita dal combinatore di punto fisso) *)
+val leavesUtil = Fn(Name "f", Fn(Name "t",  
+                    App(App(App(isEmptyTree, Var(Name "t")), Const 0), (*if isEmptyTree(t) then return 0*)
+                         App(App(App(isLeaf, Var(Name "t")), Const 1), (*else if isLeaf(t) then return 1*)
+                              Sum(App(Var(Name "f"), App(P32, Var(Name "t"))), App(Var(Name "f"), App(P33, Var(Name "t")))) )) (*else return (f P32(t)) + (f P33(t))*) 
+                    ));
+(*numero foglie = Y leavesUtil --> diamo la util al ricorsore e poi ci pensa lui*)
+val numLeaves = App(Y, leavesUtil);
+
+
+(*----------test vari--------*)
+
+(* (*test su isLeaf e isEmptyTree*)
+#1(evalSL(Empty, App(evalChurchBool, App(isEmptyTree, emptyTree))));
+#1(evalSL(Empty, App(evalChurchBool, App(isEmptyTree, oneNode))));
+#1(evalSL(Empty, App(evalChurchBool, App(isEmptyTree, tree2))));
+#1(evalSL(Empty, App(evalChurchBool, App(isLeaf, emptyTree))));
+#1(evalSL(Empty, App(evalChurchBool, App(isLeaf, oneNode))));
+#1(evalSL(Empty, App(evalChurchBool, App(isLeaf, tree2))));
+
+
+ (*Test sulle liste: *)
+val list1 = Fn(Name "x", App(App(App(Var (Name "x"), Const 5), True), Const 12)); (*<5, True, 12> = Fn x => x 5 True 12*)
+#1(evalSL(Empty, App(P31, list1))); (*1° elemento di list1 -> 5*)
+#1(evalSL(Empty, App(P32, list1))); (*2° elemento di list1 -> True*)
+#1(evalSL(Empty, App(P33, list1))); (*3° elemento di list1 -> 12*)
+*)
+
+#1(evalSL(Empty, App(numLeaves, tree6))); (*#foglie dell'albero 6 --> 20*)

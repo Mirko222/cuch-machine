@@ -36,8 +36,3 @@ val y = App ( Fn(Name "x", Sum(Var (Name "x"), Const 1)), Let (Name "y", Const 5
 
 val env1 = Concat(Name "x", Const 1, Empty, Concat(Name "y", Const 10, Empty, Empty));
 *)
-
-(*Ci serve veramente?*)
-(* verifica uguaglianza tra due Var, In "lazy.sml" ci sta un test che puoi eseguire *)
-fun equal (Var (Name x)) (Var (Name y)) = (x=y)  (*if x=y then true else false; *)
-    | equal _ _ = false; (*qualsiasi altra cosa dà false*)
