@@ -20,7 +20,7 @@
 	
 	\section{Introduzione}
 	Una \textbf{Cu}rry-\textbf{Ch}urch machine implementa un interprete minimale di un linguaggio funzionale non tipato. Abbiamo quindi implementato in SML un interprete per il linguaggio FUN visto a lezione. Nonostante una CuCh machine dovrebbe implementare l'applicazione di funzioni per sostituzione, si è qui preferito utilizzare una valutazione basata su ambienti, questo per poter sperimentare anche con semantiche differenti. La valutazione per sostituzione può comunque essere emulata con la semantica lazy statica.\\
-È stato poi usato l'interprete creato per scrivere alcuni programmi di esempio (tra cui booleani di church, numeri di church, ecc.).
+È stato poi usato l'interprete creato per scrivere alcuni programmi di esempio (tra cui booleani di Church, numeri di Church, ecc.).
 	\section{Sintassi}
 	\textit{\textcolor{gray}{syntax.sml}} \\
 	 
@@ -271,13 +271,13 @@
 	
 	\section{Esempi}
 	\textit{\textcolor{gray}{church\_bool.sml}} \\
-	Sono stati implementati i booleani di church, interamente in linguaggio FUN, e qualche semplice operazione sui booleani.\\ \\
+	Sono stati implementati i booleani di Church, interamente in linguaggio FUN, e qualche semplice operazione sui booleani.\\ \\
 	\textit{\textcolor{gray}{church\_numbers.sml}} \\
-	Sono stati implementati i numeri di church, interamente in linguaggio FUN, e qualche operazione tra numeri di church (somma, prodotto, potenza).\\ \\
+	Sono stati implementati i numeri di Church, interamente in linguaggio FUN, e qualche operazione tra numeri di Church (somma, prodotto, potenza).\\ \\
 	\textit{\textcolor{gray}{church\_factorial.sml}} \\
-	È stato implementato il fattoriale usando solamente i numeri di church (quindi è stata necessaria l'implementazione di una funzione isZero e di una funzione predecessore). Essendo questo programma più complesso, abbiamo usato il nostro interprete "immerso" in sml, in modo da poter usare variabili SML come degli alias, in modo da renderlo più leggibile. \\ \\
+	È stato implementato il fattoriale usando solamente i numeri di Church (quindi è stata necessaria l'implementazione di una funzione isZero e di una funzione predecessore). Essendo questo programma più complesso, abbiamo usato il nostro interprete "immerso" in SML, in modo da poter usare variabili SML come degli alias, in modo da renderlo più leggibile. \\ \\
 	\textit{\textcolor{gray}{church\_bintree.sml}} \\
-	Sono stati implementati gli alberi binari di church, con una funzione che ne conta le foglie. Notiamo che gli alberi binari di church non sono implementabili in SML per problemi di tipi, in FUN non tipato riusciamo invece a creare un esempio funzionante: e la realizzazione di tale esempio è stata infatti lo scopo principale di questo progetto.
+	Sono stati implementati gli alberi binari di Church, con una funzione che ne conta le foglie. Notiamo che gli alberi binari di Church non sono implementabili in SML a causa del sistema dei tipi, in FUN non tipato riusciamo invece a creare un esempio funzionante e la sua realizzazione è stata lo scopo principale di questo progetto.
 
 	\section[Osservazioni]{Osservazioni\footnote{Negli esempi proposti si è preferito adottare la sintassi di FUN per leggibilità.}}
 	Un programma che mette in mostra le differenze tra una valutazione eager ed una lazy è il programma 
@@ -343,7 +343,7 @@
 	\]
 	\end{figure}
 
-	È interessante notare che nell'implementazione delle funzioni fattoriale e numLeaves (degli esempi precedenti) è stato necessario l'uso del ricorsore \eqref{Y}. Provando tali programmi con semantiche diverse dalla lazy statica (cioè quella che corrisponde a una valutazione per sostituzione) non si ottiene il risultato voluto in quanto si va loop. 
+	È interessante notare che nell'implementazione delle funzioni fattoriale e numLeaves (degli esempi precedenti) è stato necessario l'uso del ricorsore \eqref{Y}. Eseguendo tali programmi con semantiche diverse dalla lazy statica (cioè quella che corrisponde a una valutazione per sostituzione) non si ottiene il risultato voluto in quanto si va loop. 
 	\begin{equation} \label{Y}
 	\mathrm{Y}= fn \ f \Rightarrow (fn \ x \Rightarrow f(xx))(fn \ x \Rightarrow f(xx))
 	\end{equation}

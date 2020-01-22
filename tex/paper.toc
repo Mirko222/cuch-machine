@@ -4,7 +4,8 @@
 \contentsline {section}{\numberline {2}Sintassi}{1}% 
 \contentsline {section}{\numberline {3}Semantica operazionale}{2}% 
 \contentsline {subsection}{\numberline {3.1}Dynamic eager}{2}% 
-\contentsline {subsection}{\numberline {3.2}Dynamic lazy}{2}% 
+\contentsline {subsection}{\numberline {3.2}Dynamic lazy}{3}% 
 \contentsline {subsection}{\numberline {3.3}Static eager}{3}% 
-\contentsline {subsection}{\numberline {3.4}Static lazy}{3}% 
-\contentsline {section}{\numberline {4}Osservazioni}{4}% 
+\contentsline {subsection}{\numberline {3.4}Static lazy}{4}% 
+\contentsline {section}{\numberline {4}Esempi}{4}% 
+\contentsline {section}{\numberline {5}Osservazioni}{5}% 
