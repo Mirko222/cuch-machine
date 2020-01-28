@@ -79,3 +79,7 @@ evalDL(Concat(Name "y", Const 2, Empty, Empty),
 (* (x, 3) |-  (fn y => y) x --> 3 *) 
  evalDL(Concat(Name "x", Const 3, Empty, Empty), 
  App(Fn(Name "y", Var (Name "y")), Var (Name "x")));
+
+(* empty |- let x=x in x --> loop *)
+evalDL(Empty,
+  Let(Name "x", Var(Name "x"),  Var(Name "x"))); 
